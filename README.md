@@ -46,6 +46,8 @@ Then run with docker compose:
 docker compose up --remove-orphans
 ```
 
+While its running you could connect into with any VNC viewer. Connect to `localhost:5900` with password `password`.
+
 ## 🫑 TODO
 
 - [ ] add anticaptcha
