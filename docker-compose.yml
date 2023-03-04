@@ -1,0 +1,16 @@
+version: '3'
+services:
+  inpol-checker:
+    build: .
+    container_name: inpol-checker
+    restart: unless-stopped
+    ports:
+      - "5900:5900"
+    env_file:
+      - ./.env
+    volumes:
+      - "inpol-checker-browser-profile:/tmp/browser-profile"
+    environment:
+      - "PROFILE_PATH=/tmp/browser-profile"
+volumes:
+  inpol-checker-browser-profile:

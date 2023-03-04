@@ -1,0 +1,48 @@
+#!/bin/bash
+
+_kill_procs() {
+  kill -TERM "$script"
+  wait $script
+#  kill -TERM "$awesome"
+  kill -TERM "$x11vnc"
+#  wait "$awesome"
+  wait "$x11vnc"
+  kill -TERM "$xvfb"
+}
+
+trap _kill_procs SIGTERM
+
+rm /tmp/.X99-lock || true
+XVFB_WHD=${XVFB_WHD:-1920x1080x16}
+Xvfb :99 -ac -screen 0 "$XVFB_WHD" -nolisten tcp +extension DAMAGE &
+xvfb=$!
+
+export DISPLAY=:99
+
+FD_GEOM=${FD_GEOM:-1920x1080x16}
+x11vnc \
+  -rfbport 5900 \
+  -rfbauth /root/.vnc/passwd \
+  -display :99 \
+  -auth /root/xvfb.auth \
+  -ncache 10 \
+  -noxfixes \
+  -forever \
+  -loop \
+  -nopw \
+  2> /root/.vnc/log.log \
+  &
+x11vnc=$!
+
+#awesome &
+#awesome=$!
+
+cd /opt/src || exit
+# shellcheck disable=SC2068
+exec $@
+script=$!
+
+wait $script
+#wait $awesome
+wait $x11vnc
+wait $xvfb

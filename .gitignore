@@ -1,0 +1,7 @@
+*.log
+/.browser-profile
+/.direnv
+/.env
+/.envrc
+/.idea
+__pycache__/

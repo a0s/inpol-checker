@@ -1,0 +1,14 @@
+[Unit]
+Description=Home Assistant
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+RestartSec=3
+WorkingDirectory=/root/inpol-checker
+ExecStart=/usr/bin/docker compose up --remove-orphans
+
+
+[Install]
+WantedBy=multi-user.target
