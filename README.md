@@ -10,6 +10,7 @@ After checking, the script waits for a time interval, which may jitter randomly.
 - `EMAIL` (required) - login at inpol
 - `PASSWORD` (required) - password at inpol
 - `CASE_ID` (required) - case id at inpol, can be obtained from url at case's page
+- `MONTHS_TO_CHECK` (optional) - count of months to check for enabled dates, default: `5`
 - `LOG_LEVEL` (optional) - log level, one of standard DEBUG, INFO, etc.., default: `INFO`
 - `TELEGRAM_TOKEN` (optional) - telegram bot's token, create new bot with [@BotFather](https://t.me/BotFather), send initial message in advance
 - `TELEGRAM_CHAT_ID` (optional) - your chat id, obtain it with [@get_id_bot](https://t.me/get_id_bot)
