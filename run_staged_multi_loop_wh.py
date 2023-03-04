@@ -6,13 +6,16 @@ from random import shuffle
 from lib.browser_factory import BrowserFactory
 from lib.checker import Checker
 from lib.checker_config import CheckerConfig
-from lib.messenger import TelegramMessenger
+from lib.messenger import ConsoleMessenger, TelegramMessenger
 from lib.working_hours_runner import WorkingHours, WorkingHoursRunner
 
 
 def check():
     browser = BrowserFactory().create(window_size='1300,800')
-    messenger = TelegramMessenger()
+    if 'TELEGRAM_TOKEN' in os.environ and 'TELEGRAM_CHAT_ID' in os.environ:
+        messenger = TelegramMessenger()
+    else:
+        messenger = ConsoleMessenger()
 
     try:
         config = CheckerConfig(
